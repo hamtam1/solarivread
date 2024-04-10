@@ -1,0 +1,359 @@
+{
+    "40002": {
+    "Description": "Model ID",
+    "Format": "uint16",
+    "Size": 1,
+    "Unit": "-",
+    "read": false
+  },
+    "40003": {
+    "Description": "Model Length",
+    "Format": "uint16",
+    "Size": 1,
+    "Unit": "-",
+    "read": false
+  },
+  "40004": {
+    "Description": "Manufacturer",
+    "Format": "string",
+    "Size": 16,
+    "Unit": "-",
+    "read": false
+  },
+  "40020": {
+    "Description": "Model",
+    "Format": "string",
+    "Size": 16,
+    "Unit": "-",
+    "read": true
+  },
+  "40044": {
+    "Description": "Firmware Version",
+    "Format": "string",
+    "Size": 16,
+    "Unit": "-",
+    "read": false
+  },
+  "40052": {
+    "Description": "Serial Number",
+    "Format": "string",
+    "Size": 16,
+    "Unit": "-",
+    "read": false
+  },
+  "40072": {
+    "Description": "Sum of active phases",
+    "Format": "uint16",
+    "Size": 1,
+    "Unit": "A",
+    "read": false
+  },
+  "40073": {
+    "Description": "Phase A Current",
+    "Format": "uint16",
+    "Size": 1,
+    "Unit": "A",
+    "read": false
+  },
+  "40074": {
+    "Description": "Phase B Current",
+    "Format": "uint16",
+    "Size": 1,
+    "Unit": "A",
+    "read": false
+  },
+  "40075": {
+    "Description": "Phase C Current",
+    "Format": "uint16",
+    "Size": 1,
+    "Unit": "A",
+    "read": false
+  },
+  "40076": {
+    "Description": "Amps scale factor",
+    "Format": "sunssf",
+    "Size": 1,
+    "Unit": "A_SF",
+    "read": false
+  },
+  "40080": {
+    "Description": "Voltage Phase A to N",
+    "Format": "uint16",
+    "Size": 1,
+    "Unit": "V",
+    "read": true
+  },
+  "40081": {
+    "Description": "Voltage Phase B to N",
+    "Format": "uint16",
+    "Size": 1,
+    "Unit": "V",
+    "read": true
+  },
+  "40082": {
+    "Description": "Voltage Phase C to N",
+    "Format": "uint16",
+    "Size": 1,
+    "Unit": "V",
+    "read": true
+  },
+  "40083": {
+    "Description": "Voltage scale factor",
+    "Format": "sunssf",
+    "Size": 1,
+    "Unit": "V_SF",
+    "read": false
+  },
+  "40084": {
+    "Description": "Total AC Power",
+    "Format": "int16",
+    "Size": 1,
+    "Unit": "W",
+    "read": true
+  },
+  "40085": {
+    "Description": "AC Power Scale Factor",
+    "Format": "sunssf",
+    "Size": 1,
+    "Unit": "W_SF",
+    "read": false
+  },
+  "40086": {
+    "Description": "Line Frequency",
+    "Format": "uint16",
+    "Size": 1,
+    "Unit": "Hz",
+    "read": true
+  },
+  "40087": {
+    "Description": "Line Frequency Scale Factor",
+    "Format": "sunssf",
+    "Size": 1,
+    "Unit": "Hz_SF",
+    "read": false
+  },
+  "40088": {
+    "Description": "AC Apparent Power",
+    "Format": "int16",
+    "Size": 1,
+    "Unit": "VA",
+    "read": false
+  },
+  "40089": {
+    "Description": "AC Apparent Power Scale Factor",
+    "Format": "sunssf",
+    "Size": 1,
+    "Unit": "VA_SF",
+    "read": false
+  },
+  "40090": {
+    "Description": "AC Reactive Power",
+    "Format": "int16",
+    "Size": 1,
+    "Unit": "VAr",
+    "read": false
+  },
+  "40091": {
+    "Description": "AC Reactive Power Scale Factor",
+    "Format": "sunssf",
+    "Size": 1,
+    "Unit": "VA_SF",
+    "read": false
+  },
+  "40092": {
+    "Description": "AC Power Factor",
+    "Format": "uint16",
+    "Size": 1,
+    "Unit": "PF",
+    "read": false
+  },
+  "40093": {
+    "Description": "AC Reactive Power Scale Factor",
+    "Format": "sunssf",
+    "Size": 1,
+    "Unit": "PF_SF",
+    "read": false
+  },
+  "40094": {
+    "Description": "AC Energy",
+    "Format": "acc32",
+    "Size": 2,
+    "Unit": "Wh",
+    "read": true
+  },
+  "40095": {
+    "Description": "AC Reactive Power Scale Factor",
+    "Format": "sunssf",
+    "Size": 1,
+    "Unit": "WH_SF",
+    "read": false
+  },
+  "40096": {
+    "Description": "AC Energy Scale Factor",
+    "Format": "sunssf",
+    "Size": 1,
+    "Unit": "Wh_SF",
+    "read": false
+  },
+  "40103": {
+    "Description": "Cabinet Temperature",
+    "Format": "int16",
+    "Size": 1,
+    "Unit": "C",
+    "read": true
+  },
+    "40208": {
+    "Description": "Model ID",
+    "Format": "uint16",
+    "Size": 1,
+    "Unit": "-",
+    "read": false
+  },
+    "40209": {
+    "Description": "Model Length",
+    "Format": "uint16",
+    "Size": 1,
+    "Unit": "-",
+    "read": false
+  },
+  "40218": {
+    "Description": "String ID",
+    "Format": "uint16",
+    "Size": 1,
+    "Unit": "-",
+    "read": false
+  },
+  "40227": {
+    "Description": "String 1 DC Current",
+    "Format": "uint16",
+    "Size": 1,
+    "Unit": "A",
+    "read": true
+  },
+  "40228": {
+    "Description": "String 1 DC Voltage",
+    "Format": "uint16",
+    "Size": 1,
+    "Unit": "V",
+    "read": true
+  },
+  "40229": {
+    "Description": "String 1 DC Power",
+    "Format": "uint16",
+    "Size": 1,
+    "Unit": "V",
+    "read": true
+  },
+  "40238": {
+    "Description": "String ID",
+    "Format": "uint16",
+    "Size": 1,
+    "Unit": "-",
+    "read": false
+  },
+  "40247": {
+    "Description": "String 2 DC Current",
+    "Format": "uint16",
+    "Size": 1,
+    "Unit": "A",
+    "read": true
+  },
+  "40248": {
+    "Description": "String 2 DC Voltage",
+    "Format": "uint16",
+    "Size": 1,
+    "Unit": "V",
+    "read": true
+  }, 
+  "40249": {
+    "Description": "String 1 DC Power",
+    "Format": "uint16",
+    "Size": 1,
+    "Unit": "V",
+    "read": true
+  },
+    "40258": {
+    "Description": "Model ID",
+    "Format": "uint16",
+    "Size": 1,
+    "Unit": "-",
+    "read": false
+  },
+    "40259": {
+    "Description": "Model Length",
+    "Format": "uint16",
+    "Size": 1,
+    "Unit": "-",
+    "read": false
+  },
+    "40268": {
+    "Description": "Active Power",
+    "Format": "uint16",
+    "Size": 1,
+    "Unit": "-",
+    "read": true
+  },
+    "40277": {
+    "Description": "Total Energy",
+    "Format": "acc32",
+    "Size": 1,
+    "Unit": "-",
+    "read": true
+  },
+  "40294": {
+    "Description": "Cabinet Temperature",
+    "Format": "int16",
+    "Size": 1,
+    "Unit": "C",
+    "read": true
+  },
+    "40299": {
+    "Description": "Power L1",
+    "Format": "uint16",
+    "Size": 1,
+    "Unit": "-",
+    "read": true
+  },
+    "40232": {
+    "Description": "Power L2",
+    "Format": "uint16",
+    "Size": 1,
+    "Unit": "-",
+    "read": true
+  },
+    "40345": {
+    "Description": "Power L3",
+    "Format": "uint16",
+    "Size": 1,
+    "Unit": "-",
+    "read": true
+  },
+  "40562": {
+    "Description": "String 1 DC Current",
+    "Format": "uint16",
+    "Size": 1,
+    "Unit": "A",
+    "read": true
+  },
+  "40563": {
+    "Description": "String 1 DC Voltage",
+    "Format": "uint16",
+    "Size": 1,
+    "Unit": "V",
+    "read": true
+  },
+  "40587": {
+    "Description": "String 2 DC Current",
+    "Format": "uint16",
+    "Size": 1,
+    "Unit": "A",
+    "read": true
+  },
+  "40588": {
+    "Description": "String 2 DC Voltage",
+    "Format": "uint16",
+    "Size": 1,
+    "Unit": "V",
+    "read": true
+  }
+}
