@@ -12,6 +12,7 @@ import json
 import argparse
 import pathlib
 import socket
+import time
 
 from pymodbus.client import ModbusTcpClient
 
@@ -29,6 +30,8 @@ parser.add_argument('-P', '--print', dest='print', action='store_true', default=
                     help='print to StdOut')
 parser.add_argument('-c', '-config', dest='config', default='/etc/kaco/modbus.json',
                     help='Config file (default: /etc/kaco/modbus.json)')
+parser.add_argument('-r', '-retries', dest='retries', default=1,
+                    help='retries if register read failed (default: 1)')
 args = parser.parse_args()
 
 # setup Modbus TCP Client        
@@ -48,14 +51,26 @@ def setup_client():
 #   -number of register to read
 def rmodbusreg(client, key, Size):
     try:
-        request = client.read_holding_registers(
+        i=0
+        while (i < args.retries):
+            i += 1
+            request = client.read_holding_registers(
                 address=int(key),
                 count=Size,
                 slave=args.slave)
-        return request
+            if not request.isError():
+                return request
+            time.sleep (0.1)
+        return i
     except:
         print ("[ERROR] Connection Error")
         sys.exit(1)
+
+def unsignedToSigned(n, byte_count):
+    return int.from_bytes(n.to_bytes(byte_count, 'little', signed=False), 'little', signed=True)
+
+def signedToUnsigned(n, byte_count):
+    return int.from_bytes(n.to_bytes(byte_count, 'little', signed=True), 'little', signed=False)
 
 def readconfig(filename):
     try:
@@ -76,12 +91,6 @@ def writefile(filename, content):
     except:
         print("could not write file")
         sys.exit(1)
-
-def unsignedToSigned(n, byte_count): 
-  return int.from_bytes(n.to_bytes(byte_count, 'little', signed=False), 'little', signed=True)
-
-def signedToUnsigned(n, byte_count): 
-    return int.from_bytes(n.to_bytes(byte_count, 'little', signed=True), 'little', signed=False)
     
 def main():
     config=readconfig(args.config)
@@ -95,34 +104,33 @@ def main():
         unitread=config[key]['Unit']
         read=bool(config[key]['read'])
         if (read):
-            if ( Format == "string"):
-                request = rmodbusreg(client, key, Size)
-                outstr=""
-                for val in request.registers:
-                    outstr=outstr + chr(val >> 8) + chr(val & 0x00ff)                
-                outstr = outstr.replace('\u0000',"") # remove null strings
-                data[key] = {'Unit': str(unitread), 'Value': outstr, 'Description': Description}
+            request = rmodbusreg(client, key, Size)
+            if isinstance(request, int):
+                data[key] = {'Failed': str(request), 'Description': Description}
+            else:
+                if ( Format == "string"):
+                    outstr=""
+                    for val in request.registers:
+                        outstr=outstr + chr(val >> 8) + chr(val & 0x00ff)
+                    outstr = outstr.replace('\u0000',"") # remove null strings
+                    data[key] = {'Unit': str(unitread), 'Value': outstr, 'Description': Description}
 
-            if ( Format == "acc32"):                
-                request = rmodbusreg(client,key, Size)
-                val=request.registers
-                y=(val[0]<<16) + val[1]
-                data[key] = {'Unit': str(unitread), 'Value': y, 'Description': Description}
+                if ( Format == "acc32"):
+                    val=request.registers
+                    y=(val[0]<<16) + val[1]
+                    data[key] = {'Unit': str(unitread), 'Value': y, 'Description': Description}
 
-            if ( Format == "sunssf"):
-                request = rmodbusreg(client,key, Size)
-                val=request.registers[0]
-                data[key] = {'Unit': str(unitread), 'Value': val, 'Description': Description}
-                
-            if ( Format == "int16"):
-                request = rmodbusreg(client,key, Size)
-                val=int(request.registers[0])
-                data[key] = {'Unit': str(unitread), 'Value': val, 'Description': Description}
-                
-            if ( Format == "uint16" ):
-                request = rmodbusreg(client,key, Size)
-                val=unsignedToSigned(request.registers[0], 2) 
-                data[key] = {'Unit': str(unitread), 'Value': val, 'valhex': hex(val), 'Description': Description}
+                if ( Format == "sunssf"):
+                    val=request.registers[0]
+                    data[key] = {'Unit': str(unitread), 'Value': val, 'Description': Description}
+
+                if ( Format == "int16"):
+                    val=int(request.registers[0])
+                    data[key] = {'Unit': str(unitread), 'Value': val, 'Description': Description}
+
+                if ( Format == "uint16" ):
+                    val=unsignedToSigned(request.registers[0], 2) 
+                    data[key] = {'Unit': str(unitread), 'Value': val, 'valhex': hex(val), 'Description': Description}
 
     client.close()
     if ( args.outfile ):
@@ -131,8 +139,6 @@ def main():
         print(json.dumps(data, sort_keys=True, indent=2))
     else:
         print(json.dumps(data))
-
-    pass
 
 if __name__ == '__main__':
     main()
